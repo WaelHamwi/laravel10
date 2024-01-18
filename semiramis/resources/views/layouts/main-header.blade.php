@@ -136,11 +136,17 @@
           <h6 class="p-3 mb-0 text-center">See all notifications</h6>
         </div>
       </li>
-      <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="nav-link" href="#">
-          <i class="mdi mdi-power"></i>
-        </a>
+      <li class="nav-item nav-settings d-none d-lg-block">
+        {{ __("You're logged in!") }}
       </li>
+      <li class="nav-item nav-logout d-none d-lg-block">
+    <form method="POST" action="{{ route('logout') }}" style="margin-block-end: 0">
+        @csrf
+        <button type="submit" class="nav-link btn btn-link">
+            <i class="mdi mdi-power"></i>
+        </button>
+    </form>
+</li>
       <li class="nav-item nav-settings d-none d-lg-block">
         <a class="nav-link" href="#">
           <i class="mdi mdi-format-line-spacing"></i>

@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -13,19 +14,40 @@ use App\Http\Controllers\LoginController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 */
 
-/*Route::get('/', function () {
-    return view('master');
-});*/
 
 
 
-//Route::get('/samiramis', [TemplateController::class, 'index'])->domain('samiramis.com');
-///Route::get('/dashboard', [TemplateController::class, 'index'])->domain('samiramis.com');
-///Route::get('/login', [LoginController::class, 'showLoginForm'])->domain('samiramis.com');
-//Route::get('/samiramis', [TemplateController::class, 'index'])->domain('samiramis.com');
-Route::domain('semiramis.com')->group(function () {
-    Route::get('/dashboard', [TemplateController::class, 'index']);
-    Route::get('/login', [LoginController::class, 'showLoginForm']);
+
+
+//Route::domain('semiramis.dv')->group(function () {
+   //Route::middleware('auth')->group(function () {
+    //Route::get('/', [DashboardController::class, 'index'])->name('dashboard');;
+  //});
+
+    //Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');;
+//});
+Route::domain('semiramis.dv')->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    });
+
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
 });
+require __DIR__.'/auth.php';

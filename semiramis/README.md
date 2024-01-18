@@ -55,21 +55,15 @@ Open your Apache configuration file. This is usually located in the conf/extra/h
 Add a virtual host entry for your Laravel project:
 
 <VirtualHost *:80>
-    ServerAdmin webmaster@samiramis.local
-    DocumentRoot "C:/xampp/htdocs/samiramis/public"
-    ServerName samiramis.local
-    ErrorLog "logs/samiramis-error.log"
-    CustomLog "logs/samiramis-access.log" common
-    <Directory "C:/xampp/htdocs/samiramis/public">
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
+    DocumentRoot "C:/xampp/htdocs/semiramis/public"
+    ServerName semiramis.dv
 </VirtualHost>
+
 
 Update Hosts File:
 
 Add an entry to your hosts file to map the domain to your localhost:
 127.0.0.1    semiramis.com
+C:\Windows\System32\drivers\etc\hosts
 
-The application will be accessible at http://semiramis.com/
+The application will be accessible at http://semiramis.dv/
